@@ -10,7 +10,7 @@ import Vision
 import CoreML
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
-
+    var imagePicker: UIImagePickerController!
     override func loadView() {
         let view = MainView()
         self.view = view
@@ -24,26 +24,32 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView.showWelcomeView()
-//        let vc = UIImagePickerController()
-//        vc.sourceType = .camera
-//        vc.allowsEditing = true
-//        vc.delegate = self
-//        createClassificationsRequest(for: UIImage(named: "image")!)
+        mainView.welcomeView.startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
+
+    }
+
+    @objc func startButtonClicked() {
+        mainView.hideWelcomeView()
+        imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .camera
+        imagePicker.allowsEditing = true
+        imagePicker.delegate = self
+        self.present(imagePicker, animated: true, completion: nil)
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else {
-               print("No image found")
-               return
-           }
+            print("No image found")
+            return
+        }
 
-           // print out the image size as a test
-           print(image.size)
+        createClassificationsRequest(for: image)
+        imagePicker.dismiss(animated: true, completion: nil)
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-           dismiss(animated: true, completion: nil)
-       }
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
 
     lazy var classificationRequest: VNCoreMLRequest = {
         let model: HotDogClassifier = {
@@ -55,8 +61,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
                 fatalError("Couldn't create SleepCalculator")
             }
         }()
-
-
         do {
             let model = try VNCoreMLModel(for: model.model)
             let request = VNCoreMLRequest(model: model, completionHandler: {   [weak self] request, error in
@@ -71,7 +75,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     }()
 
     func createClassificationsRequest(for image: UIImage) {
-//        predictionLabel.text = "Classifying..."
+        //        predictionLabel.text = "Classifying..."
         guard let orientation = CGImagePropertyOrientation(rawValue: UInt32(image.imageOrientation.rawValue)) else { return }
         guard let ciImage = CIImage(image: image)
         else {
@@ -88,25 +92,32 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     }
 
     func processClassifications(for request: VNRequest, error: Error?) {
-    DispatchQueue.main.async {
-       guard let results = request.results
-       else {
-        print("Unable to classify image.\n\(error!.localizedDescription)")
-//         self.predictionLabel.text = "Unable to classify image.\n\(error!.localizedDescription)"
-         return
-       }
-       let classifications = results as! [VNClassificationObservation]
-       if classifications.isEmpty {
-        print("Nothing recognized.")
-//         self.predictionLabel.text = "Nothing recognized."
-       } else {
-         let topClassifications = classifications.prefix(2)
-         let descriptions = topClassifications.map { classification in
-           return String(format: "(%.2f) %@", classification.confidence, classification.identifier)
-       }
-        print(descriptions.joined(separator: " |"))
-//       self.predictionLabel.text = descriptions.joined(separator: " |")
-      }
+        DispatchQueue.main.async {
+            guard let results = request.results
+            else {
+                print("Unable to classify image.\n\(error!.localizedDescription)")
+                return
+            }
+            let classifications = results as! [VNClassificationObservation]
+            if classifications.isEmpty {
+                print("Nothing recognized.")
+            } else {
+
+
+                let topClassifications = classifications.prefix(2)
+                let dict: [[String: Float]] = topClassifications.compactMap { classification in
+                    return [classification.identifier : classification.confidence]
+                }
+                guard let result = dict[0].keys.first else {
+                    return
+                }
+                if result == "Hotdog" {
+
+                } else {
+
+                }
+                print(result)
+            }
+        }
     }
-}
 }

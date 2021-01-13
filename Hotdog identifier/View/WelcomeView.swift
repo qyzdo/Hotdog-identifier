@@ -32,10 +32,50 @@ final class WelcomeView: UIView {
         stackView.addArrangedSubview(burgerView)
         stackView.addArrangedSubview(sandwichView)
         stackView.addArrangedSubview(soupView)
+
+        self.addSubview(dimmerView)
+        dimmerView.topAnchor.constraint(equalTo: stackView.topAnchor).isActive = true
+        dimmerView.leftAnchor.constraint(equalTo: stackView.leftAnchor).isActive = true
+        dimmerView.rightAnchor.constraint(equalTo: stackView.rightAnchor).isActive = true
+        dimmerView.bottomAnchor.constraint(equalTo: stackView.bottomAnchor).isActive = true
+
+        self.addSubview(getStartedLabel)
+        getStartedLabel.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 40).isActive = true
+        getStartedLabel.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        getStartedLabel.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+
+        self.addSubview(touchToLabel)
+        touchToLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
+        touchToLabel.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        touchToLabel.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+
+        self.addSubview(startButton)
+        startButton.bottomAnchor.constraint(equalTo: touchToLabel.topAnchor).isActive = true
+        startButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        startButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        startButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
+
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+
+    public func showAnimation() {
+        self.backgroundColor = UIColor(red: 200/255, green: 30/255, blue: 40/255, alpha: 1.0)
+        getStartedLabel.alpha = 0
+        touchToLabel.alpha = 0
+        startButton.alpha = 0
+        UIView.animate(withDuration: 1, animations: {
+            self.getStartedLabel.alpha = 1
+        }, completion: {_ in
+            UIView.animate(withDuration: 1) {
+                self.getStartedLabel.alpha = 0
+                self.dimmerView.alpha = 0
+                self.touchToLabel.alpha = 1
+                self.startButton.alpha = 1
+            }
+        })
     }
 
     public var stackView: UIStackView = {
@@ -91,6 +131,53 @@ final class WelcomeView: UIView {
         label.font = UIFont.systemFont(ofSize: 30, weight: .heavy)
         label.text = "\"The Shazam for Food\""
         label.backgroundColor = .white
+        return label
+    }()
+
+    public var getStartedLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        let attributes: [NSAttributedString.Key : Any] = [
+             NSAttributedString.Key.foregroundColor: UIColor.white,
+             NSAttributedString.Key.strokeColor: UIColor.black,
+             NSAttributedString.Key.strokeWidth: -5.0,
+            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 50)!,
+           ]
+           label.attributedText = NSAttributedString(string: "Let's Get Started", attributes: attributes)
+        return label
+    }()
+
+    public var dimmerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .black
+        view.alpha = 0.7
+        return view
+    }()
+
+    public var startButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .red
+        button.tintColor = .red
+        button.layer.cornerRadius = 40
+        button.layer.borderWidth = 4
+        button.layer.borderColor = UIColor.black.cgColor
+        return button
+    }()
+
+    public var touchToLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        let attributes: [NSAttributedString.Key : Any] = [
+             NSAttributedString.Key.foregroundColor: UIColor.white,
+             NSAttributedString.Key.strokeColor: UIColor.black,
+             NSAttributedString.Key.strokeWidth: -5.0,
+            NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 45)!,
+           ]
+           label.attributedText = NSAttributedString(string: "Touch to SEEFOOD", attributes: attributes)
         return label
     }()
 }

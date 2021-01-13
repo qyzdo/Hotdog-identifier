@@ -25,7 +25,11 @@ final class MainView: UIView {
 
     public func showWelcomeView() {
         welcomeView.isHidden = false
-        self.backgroundColor = UIColor(red: 200/255, green: 30/255, blue: 40/255, alpha: 1.0)
+        welcomeView.showAnimation()
+    }
+
+    public func hideWelcomeView() {
+        welcomeView.isHidden = true
     }
 
     public var welcomeView: WelcomeView = {
