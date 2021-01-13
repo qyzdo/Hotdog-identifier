@@ -25,7 +25,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
         super.viewDidLoad()
         mainView.showWelcomeView()
         mainView.welcomeView.startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
-
     }
 
     @objc func startButtonClicked() {
@@ -112,9 +111,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
                     return
                 }
                 if result == "Hotdog" {
-
+                    
                 } else {
-
+                    self.mainView.showNotHotdogView()
                 }
                 print(result)
             }
