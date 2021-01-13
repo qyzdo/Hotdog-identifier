@@ -11,6 +11,7 @@
 		165C601B25ACCA9F00384BA9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165C601A25ACCA9F00384BA9 /* MainView.swift */; };
 		167B189525AEF9C40011E895 /* HotDogClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 167B189425AEF9C40011E895 /* HotDogClassifier.mlmodel */; };
 		167B189825AEFEB00011E895 /* NotHotdogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167B189725AEFEB00011E895 /* NotHotdogView.swift */; };
+		167B189C25AF09900011E895 /* HotdogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167B189B25AF09900011E895 /* HotdogView.swift */; };
 		16CE420325ACB9460067580B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CE420225ACB9460067580B /* AppDelegate.swift */; };
 		16CE420525ACB9460067580B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CE420425ACB9460067580B /* SceneDelegate.swift */; };
 		16CE420725ACB9460067580B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CE420625ACB9460067580B /* ViewController.swift */; };
@@ -23,6 +24,7 @@
 		165C601A25ACCA9F00384BA9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		167B189425AEF9C40011E895 /* HotDogClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HotDogClassifier.mlmodel; sourceTree = "<group>"; };
 		167B189725AEFEB00011E895 /* NotHotdogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotHotdogView.swift; sourceTree = "<group>"; };
+		167B189B25AF09900011E895 /* HotdogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotdogView.swift; sourceTree = "<group>"; };
 		16CE41FF25ACB9460067580B /* Hotdog identifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hotdog identifier.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16CE420225ACB9460067580B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16CE420425ACB9460067580B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 				165C601625ACC96800384BA9 /* WelcomeView.swift */,
 				165C601A25ACCA9F00384BA9 /* MainView.swift */,
 				167B189725AEFEB00011E895 /* NotHotdogView.swift */,
+				167B189B25AF09900011E895 /* HotdogView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -164,6 +167,7 @@
 				167B189525AEF9C40011E895 /* HotDogClassifier.mlmodel in Sources */,
 				165C601725ACC96800384BA9 /* WelcomeView.swift in Sources */,
 				167B189825AEFEB00011E895 /* NotHotdogView.swift in Sources */,
+				167B189C25AF09900011E895 /* HotdogView.swift in Sources */,
 				165C601B25ACCA9F00384BA9 /* MainView.swift in Sources */,
 				16CE420725ACB9460067580B /* ViewController.swift in Sources */,
 				16CE420325ACB9460067580B /* AppDelegate.swift in Sources */,

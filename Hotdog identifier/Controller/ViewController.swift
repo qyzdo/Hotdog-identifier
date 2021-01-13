@@ -41,7 +41,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
             print("No image found")
             return
         }
-
+        mainView.showImageView(image: image)
+        
         createClassificationsRequest(for: image)
         imagePicker.dismiss(animated: true, completion: nil)
     }
@@ -111,7 +112,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
                     return
                 }
                 if result == "Hotdog" {
-                    
+                    self.mainView.showHotDogView()
                 } else {
                     self.mainView.showNotHotdogView()
                 }

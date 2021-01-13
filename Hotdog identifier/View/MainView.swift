@@ -13,6 +13,12 @@ final class MainView: UIView {
         super.init(frame: frame)
         let safeArea = self.safeAreaLayoutGuide
 
+        self.addSubview(imageView)
+        imageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        imageView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        imageView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+
         self.addSubview(welcomeView)
         welcomeView.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
         welcomeView.leftAnchor.constraint(equalTo: safeArea.leftAnchor).isActive = true
@@ -24,6 +30,12 @@ final class MainView: UIView {
         notHotdogView.rightAnchor.constraint(equalTo: safeArea.rightAnchor).isActive = true
         notHotdogView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         notHotdogView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+
+        self.addSubview(hotdogView)
+        hotdogView.leftAnchor.constraint(equalTo: safeArea.leftAnchor).isActive = true
+        hotdogView.rightAnchor.constraint(equalTo: safeArea.rightAnchor).isActive = true
+        hotdogView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        hotdogView.heightAnchor.constraint(equalToConstant: 250).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -43,9 +55,28 @@ final class MainView: UIView {
         notHotdogView.isHidden = false
     }
 
-    public func hideNotHotdogView() {
-        notHotdogView.isHidden = true
+    public func showHotDogView() {
+        hotdogView.isHidden = false
     }
+
+    public func hideViews() {
+        hotdogView.isHidden = true
+        notHotdogView.isHidden = true
+        imageView.isHidden = true
+    }
+
+    public func showImageView(image:UIImage) {
+        imageView.image = image
+        imageView.isHidden = false
+    }
+
+    private var imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isHidden = true
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
 
     public var welcomeView: WelcomeView = {
         let welcomeView = WelcomeView()
@@ -59,5 +90,12 @@ final class MainView: UIView {
         notHotdogView.translatesAutoresizingMaskIntoConstraints = false
         notHotdogView.isHidden = true
         return notHotdogView
+    }()
+
+    private var hotdogView: HotDogView = {
+        let hotdogView = HotDogView()
+        hotdogView.translatesAutoresizingMaskIntoConstraints = false
+        hotdogView.isHidden = true
+        return hotdogView
     }()
 }
