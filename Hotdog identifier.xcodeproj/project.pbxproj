@@ -9,17 +9,18 @@
 /* Begin PBXBuildFile section */
 		165C601725ACC96800384BA9 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165C601625ACC96800384BA9 /* WelcomeView.swift */; };
 		165C601B25ACCA9F00384BA9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165C601A25ACCA9F00384BA9 /* MainView.swift */; };
+		167B189525AEF9C40011E895 /* HotDogClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 167B189425AEF9C40011E895 /* HotDogClassifier.mlmodel */; };
 		16CE420325ACB9460067580B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CE420225ACB9460067580B /* AppDelegate.swift */; };
 		16CE420525ACB9460067580B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CE420425ACB9460067580B /* SceneDelegate.swift */; };
 		16CE420725ACB9460067580B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CE420625ACB9460067580B /* ViewController.swift */; };
 		16CE420C25ACB9480067580B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16CE420B25ACB9480067580B /* Assets.xcassets */; };
 		16CE420F25ACB9480067580B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16CE420D25ACB9480067580B /* LaunchScreen.storyboard */; };
-		16CE421E25ACBAFD0067580B /* HotDogClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 16CE421D25ACBAFD0067580B /* HotDogClassifier.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		165C601625ACC96800384BA9 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		165C601A25ACCA9F00384BA9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		167B189425AEF9C40011E895 /* HotDogClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HotDogClassifier.mlmodel; sourceTree = "<group>"; };
 		16CE41FF25ACB9460067580B /* Hotdog identifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hotdog identifier.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		16CE420225ACB9460067580B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16CE420425ACB9460067580B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -27,7 +28,6 @@
 		16CE420B25ACB9480067580B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		16CE420E25ACB9480067580B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		16CE421025ACB9480067580B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		16CE421D25ACBAFD0067580B /* HotDogClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HotDogClassifier.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +83,8 @@
 				16CE420425ACB9460067580B /* SceneDelegate.swift */,
 				16CE420B25ACB9480067580B /* Assets.xcassets */,
 				16CE420D25ACB9480067580B /* LaunchScreen.storyboard */,
-				16CE421D25ACBAFD0067580B /* HotDogClassifier.mlmodel */,
 				16CE421025ACB9480067580B /* Info.plist */,
+				167B189425AEF9C40011E895 /* HotDogClassifier.mlmodel */,
 			);
 			path = "Hotdog identifier";
 			sourceTree = "<group>";
@@ -158,11 +158,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				167B189525AEF9C40011E895 /* HotDogClassifier.mlmodel in Sources */,
 				165C601725ACC96800384BA9 /* WelcomeView.swift in Sources */,
 				165C601B25ACCA9F00384BA9 /* MainView.swift in Sources */,
 				16CE420725ACB9460067580B /* ViewController.swift in Sources */,
 				16CE420325ACB9460067580B /* AppDelegate.swift in Sources */,
-				16CE421E25ACBAFD0067580B /* HotDogClassifier.mlmodel in Sources */,
 				16CE420525ACB9460067580B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
