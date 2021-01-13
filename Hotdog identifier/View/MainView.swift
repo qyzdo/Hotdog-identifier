@@ -13,11 +13,11 @@ final class MainView: UIView {
         super.init(frame: frame)
         let safeArea = self.safeAreaLayoutGuide
 
-        self.addSubview(imageView)
-        imageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        imageView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        imageView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        self.addSubview(backgroundImageView)
+        backgroundImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        backgroundImageView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        backgroundImageView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+        backgroundImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
 
         self.addSubview(welcomeView)
         welcomeView.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
@@ -51,10 +51,6 @@ final class MainView: UIView {
         welcomeView.showAnimation()
     }
 
-    public func hideWelcomeView() {
-        welcomeView.isHidden = true
-    }
-
     public func showNotHotdogView() {
         notHotdogView.isHidden = false
     }
@@ -66,15 +62,16 @@ final class MainView: UIView {
     public func hideViews() {
         hotdogView.isHidden = true
         notHotdogView.isHidden = true
-        imageView.isHidden = true
+        backgroundImageView.isHidden = true
+        welcomeView.isHidden = true
     }
 
     public func showImageView(image:UIImage) {
-        imageView.image = image
-        imageView.isHidden = false
+        backgroundImageView.image = image
+        backgroundImageView.isHidden = false
     }
 
-    private var imageView: UIImageView = {
+    public var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isHidden = true

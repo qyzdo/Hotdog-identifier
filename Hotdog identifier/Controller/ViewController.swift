@@ -24,41 +24,46 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView.showWelcomeView()
-        mainView.welcomeView.startButton.addTarget(self, action: #selector(startButtonClicked), for: .touchUpInside)
+        mainView.welcomeView.startButton.addTarget(self, action: #selector(takeNewPhoto), for: .touchUpInside)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(takeNewPhoto))
+        mainView.backgroundImageView.isUserInteractionEnabled = true
+        mainView.backgroundImageView.addGestureRecognizer(tapGestureRecognizer)
     }
 
-    @objc func startButtonClicked() {
-        mainView.hideWelcomeView()
+    @objc func takeNewPhoto() {
+        mainView.hideViews()
         imagePicker = UIImagePickerController()
         imagePicker.sourceType = .camera
-        imagePicker.allowsEditing = true
+        imagePicker.allowsEditing = false
         imagePicker.delegate = self
         self.present(imagePicker, animated: true, completion: nil)
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let image = info[.editedImage] as? UIImage else {
+        imagePicker.dismiss(animated: true, completion: nil)
+
+        guard let image = info[.originalImage] as? UIImage else {
             print("No image found")
             return
         }
         mainView.showImageView(image: image)
-        
         createClassificationsRequest(for: image)
-        imagePicker.dismiss(animated: true, completion: nil)
     }
 
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        imagePicker.dismiss(animated: true, completion: nil)
-    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) { }
 
     lazy var classificationRequest: VNCoreMLRequest = {
+        DispatchQueue.main.async {
+            self.mainView.loadingView.isHidden = false
+            self.mainView.loadingView.rotate()
+        }
         let model: HotDogClassifier = {
             do {
                 let config = MLModelConfiguration()
                 return try HotDogClassifier(configuration: config)
             } catch {
                 print(error)
-                fatalError("Couldn't create SleepCalculator")
+                fatalError("Couldn't create model")
             }
         }()
         do {
@@ -75,7 +80,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     }()
 
     func createClassificationsRequest(for image: UIImage) {
-        //        predictionLabel.text = "Classifying..."
         guard let orientation = CGImagePropertyOrientation(rawValue: UInt32(image.imageOrientation.rawValue)) else { return }
         guard let ciImage = CIImage(image: image)
         else {
@@ -102,8 +106,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
             if classifications.isEmpty {
                 print("Nothing recognized.")
             } else {
-
-
                 let topClassifications = classifications.prefix(2)
                 let dict: [[String: Float]] = topClassifications.compactMap { classification in
                     return [classification.identifier : classification.confidence]
@@ -111,12 +113,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
                 guard let result = dict[0].keys.first else {
                     return
                 }
+                self.mainView.loadingView.isHidden = true
+                self.mainView.loadingView.stopRotating()
                 if result == "Hotdog" {
                     self.mainView.showHotDogView()
                 } else {
                     self.mainView.showNotHotdogView()
                 }
-                print(result)
             }
         }
     }
